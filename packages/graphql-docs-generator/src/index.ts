@@ -1,7 +1,7 @@
 import * as Mustache from 'mustache';
-import generateAllOps, { GQLTemplateOp, GQLAllOperations, GQLTemplateFragment, lowerCaseFirstLetter } from './generator';
+import generateAllOps, { GQLTemplateOp, GQLAllOperations, GQLTemplateFragment } from './generator';
 import { buildSchema } from './generator/utils/loading';
-import { getTemplatePartials, getOperationPartial, getExternalFragmentPartial } from './generator/utils/templates';
+import { getOperationPartial, getExternalFragmentPartial, templatePartials } from './generator/utils/templates';
 export { buildSchema } from './generator/utils/loading';
 
 export function generateGraphQLDocuments<INCLUDE_META extends boolean>(
@@ -26,7 +26,6 @@ export function generateGraphQLDocuments<INCLUDE_META extends boolean>(
     useExternalFragmentForS3Object: opts.useExternalFragmentForS3Object,
     typenameIntrospection: opts.typenameIntrospection,
   });
-  registerPartials();
 
   const allOperations = {
     queries: new Map<string, MapValueType<INCLUDE_META>>(),
@@ -116,13 +115,7 @@ function renderOperations<INCLUDE_META extends boolean>(
 
 function renderOperation(operation: GQLTemplateOp): string {
   const templateStr = getOperationPartial();
-  console.log(partials);
-  const p = getTemplatePartials();
-  const template = Mustache.render(templateStr, operation, {
-    renderArgDeclaration: p.renderArgDeclaration,
-    renderCallArgs: p.renderCallArgs,
-    renderFields: p.renderFields,
-  });
+  const template = Mustache.render(templateStr, operation, templatePartials);
   return template;
 }
 
@@ -145,15 +138,6 @@ function renderFragment(fragment: GQLTemplateFragment, useExternalFragmentForS3O
   }
 
   const templateStr = getExternalFragmentPartial();
-  const template = Mustache.render(templateStr, fragment, partials);
+  const template = Mustache.render(templateStr, fragment, templatePartials);
   return template;
-}
-
-const partials = {};
-
-function registerPartials() {
-  const p = getTemplatePartials();
-  for (const [partialName, partialContent] of Object.entries(p)) {
-    partials[partialName] = partialContent;
-  }
 }

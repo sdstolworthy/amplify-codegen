@@ -1,14 +1,3 @@
-export const getTemplatePartials = () => {
-  return {
-    renderArgDeclaration: argDeclarationPartial,
-    renderCallArgs: callArgsPartial,
-    renderExternalFragment: externalFragmentPartial,
-    renderFields: fieldsPartial,
-    renderFragment: fragmentsPartial,
-    renderOp: operationPartial,
-  };
-};
-
 export const getOperationPartial = (): string => {
   return operationPartial;
 };
@@ -38,41 +27,40 @@ const callArgsPartial = `
 `;
 
 const externalFragmentPartial = `
-fragment {{name}} on {{ on}} {
-  {{> renderFields fields=this.fields }}
+fragment {{name}} on {{on}} {
+  {{> renderFields }}
 }
 `;
 
 const fieldsPartial = `
 {{#fields}}
-  {{#hasBody}}
-      {{name}} {
-        {{#fields}}
-        {{> renderFields}}
-        {{/fields}}
-        {{#fragments}}
-        {{> renderFragment fragments=field.fragments}}
-        {{/fragments}}
-      }
-  {{/hasBody}}
-  {{^hasBody}}
-    {{name}}
-  {{/hasBody}}
+{{#hasBody}}
+{{name}} {
+  {{> renderFields}}
+  {{> renderFragment}}
+}
+{{/hasBody}}
+{{^hasBody}}
+  {{name}}
+{{/hasBody}}
 {{/fields}}
 `;
 
 const fragmentsPartial = `
-{{#each fragments }}
-  {{#if this.fields.length}}
-    {{#if this.external }}
-      ...{{this.name}}
-    {{else}}
-    ...on {{this.on}} {
-      {{> renderFields fields=this.fields }}
-    }
-    {{/if}}
-  {{/if}}
-{{/each}}
+{{#fragments}}
+{{#fields.length}}
+{{#external}}
+  ...{{name}}
+{{/external}}
+{{^external}}
+...on {{on}} {
+  {{#fields}}
+  {{> renderFields}}
+  {{/fields}}
+}
+{{/external}}
+{{/fields.length}}
+{{/fragments}}
 `;
 
 const operationPartial = `
@@ -87,3 +75,12 @@ const operationPartial = `
   {{/body}}
 }
 `;
+
+export const templatePartials = {
+  renderArgDeclaration: argDeclarationPartial,
+  renderCallArgs: callArgsPartial,
+  renderExternalFragment: externalFragmentPartial,
+  renderFields: fieldsPartial,
+  renderFragment: fragmentsPartial,
+  renderOp: operationPartial,
+};
