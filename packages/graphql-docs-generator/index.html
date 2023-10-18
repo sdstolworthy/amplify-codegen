@@ -10,7 +10,8 @@
         const schemaText = await schema.text();
         console.log(schemaText);
         const result = generateGraphQLDocuments(schemaText, { includeMetaData: true });
-        console.log(result);
+        const pre = document.createElement('pre');
+        document.body.appendChild(pre);
       };
 
       createGraphqlDocuments();
