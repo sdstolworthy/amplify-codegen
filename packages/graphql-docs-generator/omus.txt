@@ -1,0 +1,687 @@
+{
+  renderArgDeclaration: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      ${{ name }}:{{#isList}}[{{/isList}}{{type}}{{#isRequired}}!{{/isRequired}}{{#isList}}]{{#isListRequired}}!{{/isListRequired}}{{/isList}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderCallArgs: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      {{name}}:{{value}}{{#isRequired}}!{{/isRequired}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderExternalFragment: '\n' +
+    'fragment {{name}} on {{ on}} {\n' +
+    '  {{> renderFields fields=this.fields }}\n' +
+    '}\n',
+  renderFields: '\n' +
+    '{{#fields}}\n' +
+    '  {{#hasBody}}\n' +
+    '      {{name}} {\n' +
+    '        {{#fields}}\n' +
+    '        {{> renderFields}}\n' +
+    '        {{/fields}}\n' +
+    '        {{#fragments}}\n' +
+    '        {{> renderFragment fragments=field.fragments}}\n' +
+    '        {{/fragments}}\n' +
+    '      }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{^hasBody}}\n' +
+    '    {{name}}\n' +
+    '  {{/hasBody}}\n' +
+    '{{/fields}}\n',
+  renderFragment: '\n' +
+    '{{#each fragments }}\n' +
+    '  {{#if this.fields.length}}\n' +
+    '    {{#if this.external }}\n' +
+    '      ...{{this.name}}\n' +
+    '    {{else}}\n' +
+    '    ...on {{this.on}} {\n' +
+    '      {{> renderFields fields=this.fields }}\n' +
+    '    }\n' +
+    '    {{/if}}\n' +
+    '  {{/if}}\n' +
+    '{{/each}}\n',
+  renderOp: '\n' +
+    '{{type}} {{name}} {{>renderArgDeclaration}}{\n' +
+    '  {{#body}}\n' +
+    '  {{name}}{{> renderCallArgs}} \n' +
+    '  {{#hasBody}} {\n' +
+    '    {{> renderFields}}\n' +
+    '    {{> renderFragment}}\n' +
+    '  }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{/body}}\n' +
+    '}\n'
+}
+{
+  renderArgDeclaration: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      ${{ name }}:{{#isList}}[{{/isList}}{{type}}{{#isRequired}}!{{/isRequired}}{{#isList}}]{{#isListRequired}}!{{/isListRequired}}{{/isList}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderCallArgs: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      {{name}}:{{value}}{{#isRequired}}!{{/isRequired}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderExternalFragment: '\n' +
+    'fragment {{name}} on {{ on}} {\n' +
+    '  {{> renderFields fields=this.fields }}\n' +
+    '}\n',
+  renderFields: '\n' +
+    '{{#fields}}\n' +
+    '  {{#hasBody}}\n' +
+    '      {{name}} {\n' +
+    '        {{#fields}}\n' +
+    '        {{> renderFields}}\n' +
+    '        {{/fields}}\n' +
+    '        {{#fragments}}\n' +
+    '        {{> renderFragment fragments=field.fragments}}\n' +
+    '        {{/fragments}}\n' +
+    '      }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{^hasBody}}\n' +
+    '    {{name}}\n' +
+    '  {{/hasBody}}\n' +
+    '{{/fields}}\n',
+  renderFragment: '\n' +
+    '{{#each fragments }}\n' +
+    '  {{#if this.fields.length}}\n' +
+    '    {{#if this.external }}\n' +
+    '      ...{{this.name}}\n' +
+    '    {{else}}\n' +
+    '    ...on {{this.on}} {\n' +
+    '      {{> renderFields fields=this.fields }}\n' +
+    '    }\n' +
+    '    {{/if}}\n' +
+    '  {{/if}}\n' +
+    '{{/each}}\n',
+  renderOp: '\n' +
+    '{{type}} {{name}} {{>renderArgDeclaration}}{\n' +
+    '  {{#body}}\n' +
+    '  {{name}}{{> renderCallArgs}} \n' +
+    '  {{#hasBody}} {\n' +
+    '    {{> renderFields}}\n' +
+    '    {{> renderFragment}}\n' +
+    '  }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{/body}}\n' +
+    '}\n'
+}
+{
+  renderArgDeclaration: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      ${{ name }}:{{#isList}}[{{/isList}}{{type}}{{#isRequired}}!{{/isRequired}}{{#isList}}]{{#isListRequired}}!{{/isListRequired}}{{/isList}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderCallArgs: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      {{name}}:{{value}}{{#isRequired}}!{{/isRequired}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderExternalFragment: '\n' +
+    'fragment {{name}} on {{ on}} {\n' +
+    '  {{> renderFields fields=this.fields }}\n' +
+    '}\n',
+  renderFields: '\n' +
+    '{{#fields}}\n' +
+    '  {{#hasBody}}\n' +
+    '      {{name}} {\n' +
+    '        {{#fields}}\n' +
+    '        {{> renderFields}}\n' +
+    '        {{/fields}}\n' +
+    '        {{#fragments}}\n' +
+    '        {{> renderFragment fragments=field.fragments}}\n' +
+    '        {{/fragments}}\n' +
+    '      }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{^hasBody}}\n' +
+    '    {{name}}\n' +
+    '  {{/hasBody}}\n' +
+    '{{/fields}}\n',
+  renderFragment: '\n' +
+    '{{#each fragments }}\n' +
+    '  {{#if this.fields.length}}\n' +
+    '    {{#if this.external }}\n' +
+    '      ...{{this.name}}\n' +
+    '    {{else}}\n' +
+    '    ...on {{this.on}} {\n' +
+    '      {{> renderFields fields=this.fields }}\n' +
+    '    }\n' +
+    '    {{/if}}\n' +
+    '  {{/if}}\n' +
+    '{{/each}}\n',
+  renderOp: '\n' +
+    '{{type}} {{name}} {{>renderArgDeclaration}}{\n' +
+    '  {{#body}}\n' +
+    '  {{name}}{{> renderCallArgs}} \n' +
+    '  {{#hasBody}} {\n' +
+    '    {{> renderFields}}\n' +
+    '    {{> renderFragment}}\n' +
+    '  }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{/body}}\n' +
+    '}\n'
+}
+{
+  renderArgDeclaration: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      ${{ name }}:{{#isList}}[{{/isList}}{{type}}{{#isRequired}}!{{/isRequired}}{{#isList}}]{{#isListRequired}}!{{/isListRequired}}{{/isList}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderCallArgs: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      {{name}}:{{value}}{{#isRequired}}!{{/isRequired}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderExternalFragment: '\n' +
+    'fragment {{name}} on {{ on}} {\n' +
+    '  {{> renderFields fields=this.fields }}\n' +
+    '}\n',
+  renderFields: '\n' +
+    '{{#fields}}\n' +
+    '  {{#hasBody}}\n' +
+    '      {{name}} {\n' +
+    '        {{#fields}}\n' +
+    '        {{> renderFields}}\n' +
+    '        {{/fields}}\n' +
+    '        {{#fragments}}\n' +
+    '        {{> renderFragment fragments=field.fragments}}\n' +
+    '        {{/fragments}}\n' +
+    '      }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{^hasBody}}\n' +
+    '    {{name}}\n' +
+    '  {{/hasBody}}\n' +
+    '{{/fields}}\n',
+  renderFragment: '\n' +
+    '{{#each fragments }}\n' +
+    '  {{#if this.fields.length}}\n' +
+    '    {{#if this.external }}\n' +
+    '      ...{{this.name}}\n' +
+    '    {{else}}\n' +
+    '    ...on {{this.on}} {\n' +
+    '      {{> renderFields fields=this.fields }}\n' +
+    '    }\n' +
+    '    {{/if}}\n' +
+    '  {{/if}}\n' +
+    '{{/each}}\n',
+  renderOp: '\n' +
+    '{{type}} {{name}} {{>renderArgDeclaration}}{\n' +
+    '  {{#body}}\n' +
+    '  {{name}}{{> renderCallArgs}} \n' +
+    '  {{#hasBody}} {\n' +
+    '    {{> renderFields}}\n' +
+    '    {{> renderFragment}}\n' +
+    '  }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{/body}}\n' +
+    '}\n'
+}
+{
+  renderArgDeclaration: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      ${{ name }}:{{#isList}}[{{/isList}}{{type}}{{#isRequired}}!{{/isRequired}}{{#isList}}]{{#isListRequired}}!{{/isListRequired}}{{/isList}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderCallArgs: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      {{name}}:{{value}}{{#isRequired}}!{{/isRequired}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderExternalFragment: '\n' +
+    'fragment {{name}} on {{ on}} {\n' +
+    '  {{> renderFields fields=this.fields }}\n' +
+    '}\n',
+  renderFields: '\n' +
+    '{{#fields}}\n' +
+    '  {{#hasBody}}\n' +
+    '      {{name}} {\n' +
+    '        {{#fields}}\n' +
+    '        {{> renderFields}}\n' +
+    '        {{/fields}}\n' +
+    '        {{#fragments}}\n' +
+    '        {{> renderFragment fragments=field.fragments}}\n' +
+    '        {{/fragments}}\n' +
+    '      }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{^hasBody}}\n' +
+    '    {{name}}\n' +
+    '  {{/hasBody}}\n' +
+    '{{/fields}}\n',
+  renderFragment: '\n' +
+    '{{#each fragments }}\n' +
+    '  {{#if this.fields.length}}\n' +
+    '    {{#if this.external }}\n' +
+    '      ...{{this.name}}\n' +
+    '    {{else}}\n' +
+    '    ...on {{this.on}} {\n' +
+    '      {{> renderFields fields=this.fields }}\n' +
+    '    }\n' +
+    '    {{/if}}\n' +
+    '  {{/if}}\n' +
+    '{{/each}}\n',
+  renderOp: '\n' +
+    '{{type}} {{name}} {{>renderArgDeclaration}}{\n' +
+    '  {{#body}}\n' +
+    '  {{name}}{{> renderCallArgs}} \n' +
+    '  {{#hasBody}} {\n' +
+    '    {{> renderFields}}\n' +
+    '    {{> renderFragment}}\n' +
+    '  }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{/body}}\n' +
+    '}\n'
+}
+{
+  renderArgDeclaration: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      ${{ name }}:{{#isList}}[{{/isList}}{{type}}{{#isRequired}}!{{/isRequired}}{{#isList}}]{{#isListRequired}}!{{/isListRequired}}{{/isList}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderCallArgs: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      {{name}}:{{value}}{{#isRequired}}!{{/isRequired}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderExternalFragment: '\n' +
+    'fragment {{name}} on {{ on}} {\n' +
+    '  {{> renderFields fields=this.fields }}\n' +
+    '}\n',
+  renderFields: '\n' +
+    '{{#fields}}\n' +
+    '  {{#hasBody}}\n' +
+    '      {{name}} {\n' +
+    '        {{#fields}}\n' +
+    '        {{> renderFields}}\n' +
+    '        {{/fields}}\n' +
+    '        {{#fragments}}\n' +
+    '        {{> renderFragment fragments=field.fragments}}\n' +
+    '        {{/fragments}}\n' +
+    '      }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{^hasBody}}\n' +
+    '    {{name}}\n' +
+    '  {{/hasBody}}\n' +
+    '{{/fields}}\n',
+  renderFragment: '\n' +
+    '{{#each fragments }}\n' +
+    '  {{#if this.fields.length}}\n' +
+    '    {{#if this.external }}\n' +
+    '      ...{{this.name}}\n' +
+    '    {{else}}\n' +
+    '    ...on {{this.on}} {\n' +
+    '      {{> renderFields fields=this.fields }}\n' +
+    '    }\n' +
+    '    {{/if}}\n' +
+    '  {{/if}}\n' +
+    '{{/each}}\n',
+  renderOp: '\n' +
+    '{{type}} {{name}} {{>renderArgDeclaration}}{\n' +
+    '  {{#body}}\n' +
+    '  {{name}}{{> renderCallArgs}} \n' +
+    '  {{#hasBody}} {\n' +
+    '    {{> renderFields}}\n' +
+    '    {{> renderFragment}}\n' +
+    '  }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{/body}}\n' +
+    '}\n'
+}
+{
+  renderArgDeclaration: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      ${{ name }}:{{#isList}}[{{/isList}}{{type}}{{#isRequired}}!{{/isRequired}}{{#isList}}]{{#isListRequired}}!{{/isListRequired}}{{/isList}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderCallArgs: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      {{name}}:{{value}}{{#isRequired}}!{{/isRequired}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderExternalFragment: '\n' +
+    'fragment {{name}} on {{ on}} {\n' +
+    '  {{> renderFields fields=this.fields }}\n' +
+    '}\n',
+  renderFields: '\n' +
+    '{{#fields}}\n' +
+    '  {{#hasBody}}\n' +
+    '      {{name}} {\n' +
+    '        {{#fields}}\n' +
+    '        {{> renderFields}}\n' +
+    '        {{/fields}}\n' +
+    '        {{#fragments}}\n' +
+    '        {{> renderFragment fragments=field.fragments}}\n' +
+    '        {{/fragments}}\n' +
+    '      }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{^hasBody}}\n' +
+    '    {{name}}\n' +
+    '  {{/hasBody}}\n' +
+    '{{/fields}}\n',
+  renderFragment: '\n' +
+    '{{#each fragments }}\n' +
+    '  {{#if this.fields.length}}\n' +
+    '    {{#if this.external }}\n' +
+    '      ...{{this.name}}\n' +
+    '    {{else}}\n' +
+    '    ...on {{this.on}} {\n' +
+    '      {{> renderFields fields=this.fields }}\n' +
+    '    }\n' +
+    '    {{/if}}\n' +
+    '  {{/if}}\n' +
+    '{{/each}}\n',
+  renderOp: '\n' +
+    '{{type}} {{name}} {{>renderArgDeclaration}}{\n' +
+    '  {{#body}}\n' +
+    '  {{name}}{{> renderCallArgs}} \n' +
+    '  {{#hasBody}} {\n' +
+    '    {{> renderFields}}\n' +
+    '    {{> renderFragment}}\n' +
+    '  }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{/body}}\n' +
+    '}\n'
+}
+{
+  renderArgDeclaration: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      ${{ name }}:{{#isList}}[{{/isList}}{{type}}{{#isRequired}}!{{/isRequired}}{{#isList}}]{{#isListRequired}}!{{/isListRequired}}{{/isList}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderCallArgs: '\n' +
+    '{{#args.length}}\n' +
+    '  (\n' +
+    '    {{#args}}\n' +
+    '      {{name}}:{{value}}{{#isRequired}}!{{/isRequired}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},\n' +
+    '    {{/args}}\n' +
+    '  )\n' +
+    '{{/args.length}}\n',
+  renderExternalFragment: '\n' +
+    'fragment {{name}} on {{ on}} {\n' +
+    '  {{> renderFields fields=this.fields }}\n' +
+    '}\n',
+  renderFields: '\n' +
+    '{{#fields}}\n' +
+    '  {{#hasBody}}\n' +
+    '      {{name}} {\n' +
+    '        {{#fields}}\n' +
+    '        {{> renderFields}}\n' +
+    '        {{/fields}}\n' +
+    '        {{#fragments}}\n' +
+    '        {{> renderFragment fragments=field.fragments}}\n' +
+    '        {{/fragments}}\n' +
+    '      }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{^hasBody}}\n' +
+    '    {{name}}\n' +
+    '  {{/hasBody}}\n' +
+    '{{/fields}}\n',
+  renderFragment: '\n' +
+    '{{#each fragments }}\n' +
+    '  {{#if this.fields.length}}\n' +
+    '    {{#if this.external }}\n' +
+    '      ...{{this.name}}\n' +
+    '    {{else}}\n' +
+    '    ...on {{this.on}} {\n' +
+    '      {{> renderFields fields=this.fields }}\n' +
+    '    }\n' +
+    '    {{/if}}\n' +
+    '  {{/if}}\n' +
+    '{{/each}}\n',
+  renderOp: '\n' +
+    '{{type}} {{name}} {{>renderArgDeclaration}}{\n' +
+    '  {{#body}}\n' +
+    '  {{name}}{{> renderCallArgs}} \n' +
+    '  {{#hasBody}} {\n' +
+    '    {{> renderFields}}\n' +
+    '    {{> renderFragment}}\n' +
+    '  }\n' +
+    '  {{/hasBody}}\n' +
+    '  {{/body}}\n' +
+    '}\n'
+}
+{
+  queries: Map(2) {
+    'getTodo' => '\n' +
+      'query GetTodo \n' +
+      '  (\n' +
+      '      $id:ID!,\n' +
+      '  )\n' +
+      '{\n' +
+      '  getTodo\n' +
+      '  (\n' +
+      '      id:$id,\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '\n' +
+      '        createdAt\n' +
+      '        description\n' +
+      '        helloWorld\n' +
+      '        id\n' +
+      '        name\n' +
+      '        updatedAt\n' +
+      '        __typename\n' +
+      '  }\n' +
+      '}\n',
+    'listTodos' => '\n' +
+      'query ListTodos \n' +
+      '  (\n' +
+      '      $filter:ModelTodoFilterInput,\n' +
+      '      $limit:Int,\n' +
+      '      $nextToken:String,\n' +
+      '  )\n' +
+      '{\n' +
+      '  listTodos\n' +
+      '  (\n' +
+      '      filter:$filter,\n' +
+      '      limit:$limit,\n' +
+      '      nextToken:$nextToken,\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '\n' +
+      '          items {\n' +
+      '\n' +
+      '\n' +
+      '\n' +
+      '\n' +
+      '\n' +
+      '\n' +
+      '\n' +
+      '          }\n' +
+      '        nextToken\n' +
+      '        __typename\n' +
+      '  }\n' +
+      '}\n'
+  },
+  mutations: Map(3) {
+    'createTodo' => '\n' +
+      'mutation CreateTodo \n' +
+      '  (\n' +
+      '      $condition:ModelTodoConditionInput,\n' +
+      '      $input:CreateTodoInput!,\n' +
+      '  )\n' +
+      '{\n' +
+      '  createTodo\n' +
+      '  (\n' +
+      '      condition:$condition,\n' +
+      '      input:$input,\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '\n' +
+      '        createdAt\n' +
+      '        description\n' +
+      '        helloWorld\n' +
+      '        id\n' +
+      '        name\n' +
+      '        updatedAt\n' +
+      '        __typename\n' +
+      '  }\n' +
+      '}\n',
+    'deleteTodo' => '\n' +
+      'mutation DeleteTodo \n' +
+      '  (\n' +
+      '      $condition:ModelTodoConditionInput,\n' +
+      '      $input:DeleteTodoInput!,\n' +
+      '  )\n' +
+      '{\n' +
+      '  deleteTodo\n' +
+      '  (\n' +
+      '      condition:$condition,\n' +
+      '      input:$input,\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '\n' +
+      '        createdAt\n' +
+      '        description\n' +
+      '        helloWorld\n' +
+      '        id\n' +
+      '        name\n' +
+      '        updatedAt\n' +
+      '        __typename\n' +
+      '  }\n' +
+      '}\n',
+    'updateTodo' => '\n' +
+      'mutation UpdateTodo \n' +
+      '  (\n' +
+      '      $condition:ModelTodoConditionInput,\n' +
+      '      $input:UpdateTodoInput!,\n' +
+      '  )\n' +
+      '{\n' +
+      '  updateTodo\n' +
+      '  (\n' +
+      '      condition:$condition,\n' +
+      '      input:$input,\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '\n' +
+      '        createdAt\n' +
+      '        description\n' +
+      '        helloWorld\n' +
+      '        id\n' +
+      '        name\n' +
+      '        updatedAt\n' +
+      '        __typename\n' +
+      '  }\n' +
+      '}\n'
+  },
+  subscriptions: Map(3) {
+    'onCreateTodo' => '\n' +
+      'subscription OnCreateTodo \n' +
+      '  (\n' +
+      '      $filter:ModelSubscriptionTodoFilterInput,\n' +
+      '  )\n' +
+      '{\n' +
+      '  onCreateTodo\n' +
+      '  (\n' +
+      '      filter:$filter,\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '\n' +
+      '        createdAt\n' +
+      '        description\n' +
+      '        helloWorld\n' +
+      '        id\n' +
+      '        name\n' +
+      '        updatedAt\n' +
+      '        __typename\n' +
+      '  }\n' +
+      '}\n',
+    'onDeleteTodo' => '\n' +
+      'subscription OnDeleteTodo \n' +
+      '  (\n' +
+      '      $filter:ModelSubscriptionTodoFilterInput,\n' +
+      '  )\n' +
+      '{\n' +
+      '  onDeleteTodo\n' +
+      '  (\n' +
+      '      filter:$filter,\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '\n' +
+      '        createdAt\n' +
+      '        description\n' +
+      '        helloWorld\n' +
+      '        id\n' +
+      '        name\n' +
+      '        updatedAt\n' +
+      '        __typename\n' +
+      '  }\n' +
+      '}\n',
+    'onUpdateTodo' => '\n' +
+      'subscription OnUpdateTodo \n' +
+      '  (\n' +
+      '      $filter:ModelSubscriptionTodoFilterInput,\n' +
+      '  )\n' +
+      '{\n' +
+      '  onUpdateTodo\n' +
+      '  (\n' +
+      '      filter:$filter,\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '\n' +
+      '        createdAt\n' +
+      '        description\n' +
+      '        helloWorld\n' +
+      '        id\n' +
+      '        name\n' +
+      '        updatedAt\n' +
+      '        __typename\n' +
+      '  }\n' +
+      '}\n'
+  },
+  fragments: Map(0) {}
+}

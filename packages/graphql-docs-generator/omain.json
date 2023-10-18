@@ -1,0 +1,209 @@
+{
+  queries: Map(2) {
+    'getTodo' => '\n' +
+      'query GetTodo \n' +
+      '  (\n' +
+      '      $id:ID!\n' +
+      '  )\n' +
+      '{\n' +
+      '  getTodo\n' +
+      '  (\n' +
+      '      id:$id\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '    \n' +
+      '    createdAt\n' +
+      '    description\n' +
+      '    helloWorld\n' +
+      '    id\n' +
+      '    name\n' +
+      '    updatedAt\n' +
+      '    __typename\n' +
+      '    \n' +
+      '  }\n' +
+      '}\n',
+    'listTodos' => '\n' +
+      'query ListTodos \n' +
+      '  (\n' +
+      '      $filter:ModelTodoFilterInput,\n' +
+      '      $limit:Int,\n' +
+      '      $nextToken:String\n' +
+      '  )\n' +
+      '{\n' +
+      '  listTodos\n' +
+      '  (\n' +
+      '      filter:$filter,\n' +
+      '      limit:$limit,\n' +
+      '      nextToken:$nextToken\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '    \n' +
+      '      items {\n' +
+      '        \n' +
+      '    createdAt\n' +
+      '    description\n' +
+      '    helloWorld\n' +
+      '    id\n' +
+      '    name\n' +
+      '    updatedAt\n' +
+      '    __typename\n' +
+      '        \n' +
+      '      }\n' +
+      '    nextToken\n' +
+      '    __typename\n' +
+      '    \n' +
+      '  }\n' +
+      '}\n'
+  },
+  mutations: Map(3) {
+    'createTodo' => '\n' +
+      'mutation CreateTodo \n' +
+      '  (\n' +
+      '      $condition:ModelTodoConditionInput,\n' +
+      '      $input:CreateTodoInput!\n' +
+      '  )\n' +
+      '{\n' +
+      '  createTodo\n' +
+      '  (\n' +
+      '      condition:$condition,\n' +
+      '      input:$input\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '    \n' +
+      '    createdAt\n' +
+      '    description\n' +
+      '    helloWorld\n' +
+      '    id\n' +
+      '    name\n' +
+      '    updatedAt\n' +
+      '    __typename\n' +
+      '    \n' +
+      '  }\n' +
+      '}\n',
+    'deleteTodo' => '\n' +
+      'mutation DeleteTodo \n' +
+      '  (\n' +
+      '      $condition:ModelTodoConditionInput,\n' +
+      '      $input:DeleteTodoInput!\n' +
+      '  )\n' +
+      '{\n' +
+      '  deleteTodo\n' +
+      '  (\n' +
+      '      condition:$condition,\n' +
+      '      input:$input\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '    \n' +
+      '    createdAt\n' +
+      '    description\n' +
+      '    helloWorld\n' +
+      '    id\n' +
+      '    name\n' +
+      '    updatedAt\n' +
+      '    __typename\n' +
+      '    \n' +
+      '  }\n' +
+      '}\n',
+    'updateTodo' => '\n' +
+      'mutation UpdateTodo \n' +
+      '  (\n' +
+      '      $condition:ModelTodoConditionInput,\n' +
+      '      $input:UpdateTodoInput!\n' +
+      '  )\n' +
+      '{\n' +
+      '  updateTodo\n' +
+      '  (\n' +
+      '      condition:$condition,\n' +
+      '      input:$input\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '    \n' +
+      '    createdAt\n' +
+      '    description\n' +
+      '    helloWorld\n' +
+      '    id\n' +
+      '    name\n' +
+      '    updatedAt\n' +
+      '    __typename\n' +
+      '    \n' +
+      '  }\n' +
+      '}\n'
+  },
+  subscriptions: Map(3) {
+    'onCreateTodo' => '\n' +
+      'subscription OnCreateTodo \n' +
+      '  (\n' +
+      '      $filter:ModelSubscriptionTodoFilterInput\n' +
+      '  )\n' +
+      '{\n' +
+      '  onCreateTodo\n' +
+      '  (\n' +
+      '      filter:$filter\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '    \n' +
+      '    createdAt\n' +
+      '    description\n' +
+      '    helloWorld\n' +
+      '    id\n' +
+      '    name\n' +
+      '    updatedAt\n' +
+      '    __typename\n' +
+      '    \n' +
+      '  }\n' +
+      '}\n',
+    'onDeleteTodo' => '\n' +
+      'subscription OnDeleteTodo \n' +
+      '  (\n' +
+      '      $filter:ModelSubscriptionTodoFilterInput\n' +
+      '  )\n' +
+      '{\n' +
+      '  onDeleteTodo\n' +
+      '  (\n' +
+      '      filter:$filter\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '    \n' +
+      '    createdAt\n' +
+      '    description\n' +
+      '    helloWorld\n' +
+      '    id\n' +
+      '    name\n' +
+      '    updatedAt\n' +
+      '    __typename\n' +
+      '    \n' +
+      '  }\n' +
+      '}\n',
+    'onUpdateTodo' => '\n' +
+      'subscription OnUpdateTodo \n' +
+      '  (\n' +
+      '      $filter:ModelSubscriptionTodoFilterInput\n' +
+      '  )\n' +
+      '{\n' +
+      '  onUpdateTodo\n' +
+      '  (\n' +
+      '      filter:$filter\n' +
+      '  )\n' +
+      ' \n' +
+      '   {\n' +
+      '    \n' +
+      '    createdAt\n' +
+      '    description\n' +
+      '    helloWorld\n' +
+      '    id\n' +
+      '    name\n' +
+      '    updatedAt\n' +
+      '    __typename\n' +
+      '    \n' +
+      '  }\n' +
+      '}\n'
+  },
+  fragments: Map(0) {}
+}

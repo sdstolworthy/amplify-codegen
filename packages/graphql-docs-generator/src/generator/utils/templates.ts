@@ -1,12 +1,12 @@
-export const getTemplatePartials = ():{[key: string]: string;} => {
+export const getTemplatePartials = () => {
   return {
     renderArgDeclaration: argDeclarationPartial,
     renderCallArgs: callArgsPartial,
     renderExternalFragment: externalFragmentPartial,
     renderFields: fieldsPartial,
     renderFragment: fragmentsPartial,
-    renderOp: operationPartial
-  }
+    renderOp: operationPartial,
+  };
 };
 
 export const getOperationPartial = (): string => {
@@ -18,23 +18,23 @@ export const getExternalFragmentPartial = (): string => {
 };
 
 const argDeclarationPartial = `
-{{#if args.length}}
+{{#args.length}}
   (
-    {{#each args as |arg index|}}
-      \${{ arg.name }}:{{#if isList}}[{{/if}}{{arg.type}}{{#if arg.isRequired}}!{{/if}}{{#if isList}}]{{#if isListRequired}}!{{/if}}{{/if}}{{#if arg.defaultValue}}={{arg.defaultValue}}{{/if}}{{#unless @last}},{{/unless}}
-    {{/each}}
+    {{#args}}
+      \${{ name }}:{{#isList}}[{{/isList}}{{type}}{{#isRequired}}!{{/isRequired}}{{#isList}}]{{#isListRequired}}!{{/isListRequired}}{{/isList}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},
+    {{/args}}
   )
-{{/if}}
+{{/args.length}}
 `;
 
 const callArgsPartial = `
-{{#if args.length}}
+{{#args.length}}
   (
-    {{#each args}}
-      {{name}}:{{value}}{{#if isRequired}}!{{/if}}{{#if defaultValue }}={{defaultValue}}{{/if}}{{#unless @last}},{{/unless}}
-    {{/each}}
+    {{#args}}
+      {{name}}:{{value}}{{#isRequired}}!{{/isRequired}}{{#defaultValue}}={{defaultValue}}{{/defaultValue}},
+    {{/args}}
   )
-{{/if}}
+{{/args.length}}
 `;
 
 const externalFragmentPartial = `
@@ -44,16 +44,21 @@ fragment {{name}} on {{ on}} {
 `;
 
 const fieldsPartial = `
-{{#each fields as |field index|}}
-  {{#if field.hasBody }}
-      {{field.name}} {
-        {{> renderFields fields=field.fields}}
+{{#fields}}
+  {{#hasBody}}
+      {{name}} {
+        {{#fields}}
+        {{> renderFields}}
+        {{/fields}}
+        {{#fragments}}
         {{> renderFragment fragments=field.fragments}}
+        {{/fragments}}
       }
-  {{else}}
-    {{field.name}}
-  {{/if}}
-{{/each}}
+  {{/hasBody}}
+  {{^hasBody}}
+    {{name}}
+  {{/hasBody}}
+{{/fields}}
 `;
 
 const fragmentsPartial = `
@@ -71,12 +76,14 @@ const fragmentsPartial = `
 `;
 
 const operationPartial = `
-{{type}} {{name}} {{>renderArgDeclaration args=args}}{
-  {{body.name}}{{> renderCallArgs args=body.args}} 
-  {{#if body.hasBody}} {
-    {{> renderFields fields=body.fields}}
-    {{> renderFragment fragments=body.fragments}}
+{{type}} {{name}} {{>renderArgDeclaration}}{
+  {{#body}}
+  {{name}}{{> renderCallArgs}} 
+  {{#hasBody}} {
+    {{> renderFields}}
+    {{> renderFragment}}
   }
-  {{/if}}
+  {{/hasBody}}
+  {{/body}}
 }
 `;

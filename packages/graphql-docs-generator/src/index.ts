@@ -1,4 +1,4 @@
-import Mustache from 'mustache';
+import * as Mustache from 'mustache';
 import generateAllOps, { GQLTemplateOp, GQLAllOperations, GQLTemplateFragment, lowerCaseFirstLetter } from './generator';
 import { buildSchema } from './generator/utils/loading';
 import { getTemplatePartials, getOperationPartial, getExternalFragmentPartial } from './generator/utils/templates';
@@ -27,7 +27,6 @@ export function generateGraphQLDocuments<INCLUDE_META extends boolean>(
     typenameIntrospection: opts.typenameIntrospection,
   });
   registerPartials();
-  registerHelpers();
 
   const allOperations = {
     queries: new Map<string, MapValueType<INCLUDE_META>>(),
@@ -117,11 +116,14 @@ function renderOperations<INCLUDE_META extends boolean>(
 
 function renderOperation(operation: GQLTemplateOp): string {
   const templateStr = getOperationPartial();
-  const template = Mustache.compile(templateStr, {
-    noEscape: true,
-    preventIndent: true,
+  console.log(partials);
+  const p = getTemplatePartials();
+  const template = Mustache.render(templateStr, operation, {
+    renderArgDeclaration: p.renderArgDeclaration,
+    renderCallArgs: p.renderCallArgs,
+    renderFields: p.renderFields,
   });
-  return template(operation);
+  return template;
 }
 
 function renderFragments(fragments: Array<GQLTemplateFragment>, useExternalFragmentForS3Object: boolean): Map<string, string> {
@@ -143,21 +145,15 @@ function renderFragment(fragment: GQLTemplateFragment, useExternalFragmentForS3O
   }
 
   const templateStr = getExternalFragmentPartial();
-  const template = Mustache.compile(templateStr, {
-    noEscape: true,
-    preventIndent: true,
-  });
-  return template(fragment);
+  const template = Mustache.render(templateStr, fragment, partials);
+  return template;
 }
+
+const partials = {};
 
 function registerPartials() {
-  const partials = getTemplatePartials();
-  for (const [partialName, partialContent] of Object.entries(partials)) {
-    Mustache.registerPartial(partialName, partialContent);
+  const p = getTemplatePartials();
+  for (const [partialName, partialContent] of Object.entries(p)) {
+    partials[partialName] = partialContent;
   }
-}
-
-function registerHelpers() {
-  const formatNameHelper = lowerCaseFirstLetter;
-  Mustache.registerHelper('formatName', formatNameHelper);
 }

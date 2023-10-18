@@ -33,6 +33,7 @@
     "extract-api": "ts-node ../../scripts/extract-api.ts"
   },
   "dependencies": {
+    "@types/mustache": "^4.2.4",
     "graphql": "^15.5.0",
     "mustache": "^4.2.0",
     "yargs": "^15.1.0"
