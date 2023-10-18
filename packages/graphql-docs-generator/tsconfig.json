@@ -1,11 +1,12 @@
 {
     "compilerOptions": {
         "target": "es6",
-        "module": "commonjs",
+        "module": "esnext",
         "sourceMap": true,
         "outDir": "lib",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        "moduleResolution": "node",
         "sourceRoot": "src",
         "lib": [
             "es2017",

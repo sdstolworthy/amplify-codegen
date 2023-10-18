@@ -1,17 +1,12 @@
 import {
   GraphQLField,
-  GraphQLInterfaceType,
   GraphQLObjectType,
-  GraphQLScalarType,
   GraphQLSchema,
-  GraphQLUnionType,
-  GraphQLList,
   isObjectType,
   isInterfaceType,
   isUnionType,
   isEnumType,
   isScalarType,
-  isListType,
 } from 'graphql';
 import getFragment from './getFragment';
 import { GQLConcreteType, GQLTemplateField, GQLTemplateFragment, GQLDocsGenOptions } from './types';

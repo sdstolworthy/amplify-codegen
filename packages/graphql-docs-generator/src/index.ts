@@ -1,8 +1,7 @@
-import * as Mustache from 'mustache';
+import Mustache from 'mustache';
 import generateAllOps, { GQLTemplateOp, GQLAllOperations, GQLTemplateFragment } from './generator';
 import { buildSchema } from './generator/utils/loading';
 import { getOperationPartial, getExternalFragmentPartial, templatePartials } from './generator/utils/templates';
-export { buildSchema } from './generator/utils/loading';
 
 export function generateGraphQLDocuments<INCLUDE_META extends boolean>(
   schema: string,

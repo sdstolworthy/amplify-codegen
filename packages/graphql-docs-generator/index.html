@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script type="module">
+      import { generateGraphQLDocuments } from './lib/bundle.js';
+
+      const createGraphqlDocuments = async () => {
+        const schema = await fetch('/g.graphql');
+        const schemaText = await schema.text();
+        console.log(schemaText);
+        const result = generateGraphQLDocuments(schemaText, { includeMetaData: true });
+        console.log(result);
+      };
+
+      createGraphqlDocuments();
+    </script>
+  </head>
+  <body>
+    <div>Hello</div>
+  </body>
+</html>
