@@ -38,8 +38,12 @@ export function run(argv: Array<String>): void {
         },
       },
       async argv => {
-        generateGraphQLDocuments(argv.schema, { maxDepth: argv.maxDepth, typenameIntrospection: argv.typenameIntrospection });
-      }
+        const output = generateGraphQLDocuments(argv.schema, {
+          maxDepth: argv.maxDepth,
+          typenameIntrospection: argv.typenameIntrospection,
+        });
+        console.log(output);
+      },
     )
     .help()
     .version()

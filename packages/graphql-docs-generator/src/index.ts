@@ -1,4 +1,4 @@
-const handlebars = require('handlebars/dist/handlebars');
+import Mustache from 'mustache';
 import generateAllOps, { GQLTemplateOp, GQLAllOperations, GQLTemplateFragment, lowerCaseFirstLetter } from './generator';
 import { buildSchema } from './generator/utils/loading';
 import { getTemplatePartials, getOperationPartial, getExternalFragmentPartial } from './generator/utils/templates';
@@ -117,7 +117,7 @@ function renderOperations<INCLUDE_META extends boolean>(
 
 function renderOperation(operation: GQLTemplateOp): string {
   const templateStr = getOperationPartial();
-  const template = handlebars.compile(templateStr, {
+  const template = Mustache.compile(templateStr, {
     noEscape: true,
     preventIndent: true,
   });
@@ -143,7 +143,7 @@ function renderFragment(fragment: GQLTemplateFragment, useExternalFragmentForS3O
   }
 
   const templateStr = getExternalFragmentPartial();
-  const template = handlebars.compile(templateStr, {
+  const template = Mustache.compile(templateStr, {
     noEscape: true,
     preventIndent: true,
   });
@@ -153,11 +153,11 @@ function renderFragment(fragment: GQLTemplateFragment, useExternalFragmentForS3O
 function registerPartials() {
   const partials = getTemplatePartials();
   for (const [partialName, partialContent] of Object.entries(partials)) {
-    handlebars.registerPartial(partialName, partialContent);
+    Mustache.registerPartial(partialName, partialContent);
   }
 }
 
 function registerHelpers() {
   const formatNameHelper = lowerCaseFirstLetter;
-  handlebars.registerHelper('formatName', formatNameHelper);
+  Mustache.registerHelper('formatName', formatNameHelper);
 }
