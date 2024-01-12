@@ -16,6 +16,14 @@ batch:
         type: WINDOWS_SERVER_2019_CONTAINER
         compute-type: BUILD_GENERAL1_LARGE
         image: $WINDOWS_IMAGE_2019
+    - identifier: test_windows
+      buildspec: .codebuild/test_windows.yml
+      env:
+        type: WINDOWS_SERVER_2019_CONTAINER
+        compute-type: BUILD_GENERAL1_LARGE
+        image: $WINDOWS_IMAGE_2019
+      depend-on:
+        - build_windows
     - identifier: test
       buildspec: .codebuild/test.yml
       env:
@@ -24,6 +32,12 @@ batch:
         - build_linux
     - identifier: verify_api_extract
       buildspec: .codebuild/verify_api_extract.yml
+      env:
+        compute-type: BUILD_GENERAL1_MEDIUM
+      depend-on:
+        - build_linux
+    - identifier: verify_dependency_licenses_extract
+      buildspec: .codebuild/verify_dependency_licenses_extract.yml
       env:
         compute-type: BUILD_GENERAL1_MEDIUM
       depend-on:
@@ -51,6 +65,16 @@ batch:
         variables:
           TEST_SUITE: src/__tests__/build-app-android.test.ts
           CLI_REGION: us-east-2
+      debug-session: true
+      depend-on:
+        - publish_to_local_registry
+    - identifier: codegen_matrix
+      buildspec: .codebuild/run_e2e_tests.yml
+      env:
+        compute-type: BUILD_GENERAL1_LARGE
+        variables:
+          TEST_SUITE: src/__tests__/codegen-matrix.test.ts
+          CLI_REGION: ap-southeast-2
       debug-session: true
       depend-on:
         - publish_to_local_registry
